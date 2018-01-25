@@ -21,22 +21,22 @@ def test_compute_EA():
     # call the function
     EA = compute_EA(RA=100., RB=100.)
 
-    # test whether or not EA is a float number 
-    assert type(EA) == float 
+    # test whether or not EA is a float number
+    assert type(EA) == float
 
-    # check the correctness of the result 
-    assert EA == 0.5 
-    
+    # check the correctness of the result
+    assert EA == 0.5
+
     #-------------------------
     # test another example
-    EA = compute_EA(RA=100., RB=500.) 
-    # check the correctness of the result 
+    EA = compute_EA(RA=100., RB=500.)
+    # check the correctness of the result
     assert EA == 1.0/11
 
     # test another example
     EA = compute_EA(RA=500., RB=100.)
 
-    # check the correctness of the result 
+    # check the correctness of the result
     assert EA == 1./1.1
 
 #-------------------------------------------------------------------------
@@ -46,19 +46,19 @@ def test_update_RA():
     # call the function
     RA_new = update_RA(RA=100., SA=1., EA=1.)
 
-    # test whether or not EA is a float number 
-    assert type(RA_new) == float 
+    # test whether or not EA is a float number
+    assert type(RA_new) == float
 
-    # check the correctness of the result 
-    assert RA_new == 100 
- 
+    # check the correctness of the result
+    assert RA_new == 100
+
     # test another example
     RA_new = update_RA(RA=100., SA=0., EA=0.)
-    assert RA_new == 100 
+    assert RA_new == 100
 
     # test another example
     RA_new = update_RA(RA=100., SA=1., EA=0.)
-    assert RA_new == 116 
+    assert RA_new == 116
 
     # test another example
     RA_new = update_RA(RA=100., SA=0., EA=1.)
@@ -70,7 +70,7 @@ def test_update_RA():
 
     # test another example
     RA_new = update_RA(RA=100., SA=1., EA=.5, K = 200)
-    assert RA_new == 200 
+    assert RA_new == 200
 
 
 
@@ -84,13 +84,13 @@ def test_elo_rating():
     # call the function
     R = elo_rating(W, n_player = 2)
 
-    # test data type of the result 
+    # test data type of the result
     assert type(R) == list
-    assert type(R[0]) == float 
+    assert type(R[0]) == float
     assert np.allclose(sum(R), 400*2, atol =1e-2) # the sum of all player's rating should stay the same after a game
     assert R == [408., 392.]
 
-    # test k-factor 
+    # test k-factor
     R = elo_rating(W, n_player = 2, K=32.)
     assert np.allclose(sum(R), 400*2, atol =1e-2) # the sum of all player's rating should stay the same after a game
     assert R == [416., 384.]
@@ -106,9 +106,8 @@ def test_elo_rating():
 
     assert R[1]>R[0] # because of game 1
     assert R[2]>R[1] # because of game 2
-    assert R[3]>R[0] # because of game 3 
+    assert R[3]>R[0] # because of game 3
     assert R[2]>R[0] # because of game 1 & 2
     assert R[2]>R[3] # because player 2 beats player 1 (higher rating),
                      # player 2 beats player 0 (lower rating)
     assert np.allclose(sum(R), 400*4, atol = 1e-1)
-
