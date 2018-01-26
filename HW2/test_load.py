@@ -1,4 +1,4 @@
-from problem1 import elo_rating
+from problem1 import *
 import numpy as np
 #-------------------------------------------------------------------------
 '''
@@ -41,36 +41,20 @@ def import_team_names(filename ='ncaa_teams.txt'):
     #########################################
     return team_names
 
-#--------------------------
-def team_rating(resultfile = 'ncaa_results.csv',
-                teamfile='ncaa_teams.txt',
-                K=16.):
-    '''
-        Rate the teams in the game results imported from a CSV file.
-        (1) import the W matrix from `resultfile` file.
-        (2) compute Elo ratings of all the teams
-        (3) return a list of team names sorted by descending order of Elo ratings
-
-        Input:
-                resultfile: the csv filename for the game result matrix, a string.
-                teamfile: the text filename for the team names, a string.
-                K: a float scalar value, which is the k-factor of Elo rating system
-
-        Output:
-                top_teams: the list of team names in descending order of their Elo ratings, a python list of string values, such as ['team a', 'team b','team c'].
-                top_ratings: the list of elo ratings in descending order, a python list of float values, such as ['600.', '500.','300.'].
-
-    '''
-    #########################################
-    ## INSERT YOUR CODE HERE
-    W = import_W(resultfile)
-    N = import_team_names(teamfile)
-    top_teams = list()
-
-    M = elo_rating(W, len(N))
-    top_ratings = sorted(M,reverse = True)
-    ratings_indice = sorted(range(len(M)),reverse = True,key=lambda x:M[x])
-    for i in ratings_indice:
-        top_teams.append(N[i])
-    #########################################
-    return top_teams, top_ratings
+W = import_W('ncaa_results2.csv')
+AW = [[1, 0], # Game1: player 1 wins player 0
+     [2, 1], # Game2: player 2 wins player 1
+     [3, 0]] # Game3: player 3 wins player 0
+W2 = list(W)
+N = import_team_names('ncaa_teams.txt')
+#print(len(N))
+teams = list()
+A = elo_rating(W, 8)
+B = sorted(A, reverse = True)
+C = sorted(range(len(A)),reverse = True,key=lambda x:A[x])
+for i in C:
+    teams.append(N[i])
+print (A)
+print (B)
+print (C)
+print(teams)
