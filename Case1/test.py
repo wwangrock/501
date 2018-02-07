@@ -1,10 +1,20 @@
-import tweepy
+from matplotlib.ticker import FuncFormatter
+import matplotlib.pyplot as plt
+import numpy as np
 
-auth = tweepy.OAuthHandler('Rs8Ba8b7AOL7IDVIHljuVBERC', '84xMvqAD4dfndq29a4RzarCUufdJ9hBHZKcLctqayJXRH6LbLA')
-auth.set_access_token('389922744-Km3NZ6rShZqSHZ3ZPh24lLBSVxGVqybX8r5B57f8', 'lJDLpjjyx9QwcCffCJZr4dYKo7aqNwdO7skbjeHxJWZLs')
+x = np.arange(4)
+money = [1.5, 2.5, 5.5, 2.0]
 
-api = tweepy.API(auth)
 
-public_tweets = api.home_timeline()
-for tweet in public_tweets:
-    print tweet.text
+#def millions(x, pos):
+    #'The two args are the value and tick position'
+    #return '$%1.1fM' % (x * 1e-6)
+
+
+#formatter = FuncFormatter(millions)
+
+fig, ax = plt.subplots()
+#ax.yaxis.set_major_formatter(formatter)
+plt.bar(x, money)
+plt.xticks(x, ('Bill', 'Fred', 'Mary', 'Sue'))
+plt.show()

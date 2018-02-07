@@ -20,7 +20,7 @@ def oauth_login():
 twitter_api = oauth_login()
 
 # Store the tweets into a local file
-q = '#SuperBowl'
+q = '#Gopats'
 count = 100
 
 search_results = twitter_api.search.tweets(q=q, count=count)
