@@ -24,11 +24,17 @@ def update_U(R, V, U, beta=.001, mu=1.):
 
     #########################################
     ## INSERT YOUR CODE HERE
+    B = np.where(R > 0, 1, 0)
+    L = np.multiply((np.subtract(R, np.dot(U, V))), B)
 
+    Vt = np.transpose(V)
+    m1 = np.dot(-2, L)
+    m2 = np.dot(m1, Vt)
+    m3 = np.dot(2, mu)
+    m4 = np.dot(m3, U)
+    dU = np.add(m2, m4)
 
-
-
-
+    U = np.subtract(U, np.dot(beta, dU))
     #########################################
     return U
 
@@ -48,13 +54,17 @@ def update_V(R, U, V, beta=.001, mu=1.):
     '''
     #########################################
     ## INSERT YOUR CODE HERE
+    B = np.where(R > 0, 1, 0)
+    L = np.multiply((np.subtract(R, np.dot(U, V))), B)
 
+    Ut = np.transpose(U)
+    m1 = np.dot(-2, Ut)
+    m2 = np.dot(m1, L)
+    m3 = np.dot(2, mu)
+    m4 = np.dot(m3, V)
+    dV = np.add(m2, m4)
 
-
-
-
-
-
+    V = np.subtract(U, np.dot(beta, dV))
     #########################################
     return V 
  
